@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_viva_app/auth.dart';
+
 import 'package:second_viva_app/homeScreen.dart';
 
 class login_page extends StatefulWidget {
@@ -74,8 +77,9 @@ class _login_pageState extends State<login_page> {
                     'password': password.text,
                     'device_name': 'mobile',
                   };
+                  var credss = jsonEncode(creds);
                   if (formkey.currentState!.validate()) {
-                    Provider.of<auth>(context, listen: false).login(creds);
+                    Provider.of<auth>(context, listen: false).login(credss);
                     Navigator.push(
                         context,
                         MaterialPageRoute(
