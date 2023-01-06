@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:second_viva_app/auth.dart';
 import 'package:second_viva_app/login_page.dart';
 
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -22,6 +24,11 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
+  final storage = new FlutterSecureStorage();
+  getToken() async {
+    return await storage.read(key: 'token');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +39,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ListTile(
               title: Text('Logout'),
               leading: Icon(Icons.logout),
-              onTap: () {
+              onTap: () async {
+                print(await getToken());
+                await storage.delete(key: 'token');
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => (login_page())));
               },

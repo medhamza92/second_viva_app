@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart' as Dio;
 
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:second_viva_app/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +34,8 @@ class _login_pageState extends State<login_page> {
 
   var scode;
   var error;
+  final storage = new FlutterSecureStorage();
+  get storr => storage;
   login(var creds) async {
     print(creds);
 
@@ -42,7 +45,7 @@ class _login_pageState extends State<login_page> {
       scode = response.statusCode;
       if (response.statusCode == 200) {
         String token = response.data.toString();
-        this.tryToken(token: token);
+        tryToken(token: token);
       } else {
         error = response.data['message'].toString();
       }
@@ -51,6 +54,12 @@ class _login_pageState extends State<login_page> {
       return e;
     }
   }
+
+  void storeToken({String? token}) async {
+    this.storage.write(key: 'token', value: token);
+  }
+
+
 
   void tryToken({String? token}) async {
     if (token == null) {
@@ -64,6 +73,7 @@ class _login_pageState extends State<login_page> {
         if (response.statusCode == 200) {
           print(response.data.toString());
           token = token;
+          storeToken(token: token);
         } else {
           print(response.statusCode);
           print(response.data['message'].toString());
@@ -128,12 +138,12 @@ class _login_pageState extends State<login_page> {
 
                     await login(credss);
                     print(scode);
+
                     if (scode == 200) {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => (HomeScreen())));
-                     
                     } else {
                       print(error);
                     }
