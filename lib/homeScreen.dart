@@ -25,36 +25,19 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text("hello")),
-      drawer: Drawer(
-        child: Consumer<auth>(builder: (context, auth, child) {
-          if (!auth.authentificated)
-            return ListView(
-              children: [
-                ListTile(
-                  title: Text('Logout'),
-                  leading: Icon(Icons.logout),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => (login_page())));
-                  },
-                ),
-              ],
-            );
-          else
-            return ListView(
-              children: [
-                ListTile(
-                  title: Text('Logout'),
-                  leading: Icon(Icons.logout),
-                  onTap: () {},
-                )
-              ],
-            );
-        }),
-      ),
-    );
+        body: Center(child: Text("hello")),
+        drawer: Drawer(
+            child: ListView(
+          children: [
+            ListTile(
+              title: Text('Logout'),
+              leading: Icon(Icons.logout),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => (login_page())));
+              },
+            )
+          ],
+        )));
   }
 }

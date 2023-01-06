@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:dio/dio.dart' as Dio;
 
+import 'package:second_viva_app/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_viva_app/auth.dart';
@@ -27,6 +29,49 @@ class _login_pageState extends State<login_page> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+  }
+
+  var scode;
+  var error;
+  login(var creds) async {
+    print(creds);
+
+    try {
+      Dio.Response response = await dio().post('/sanctum/token', data: creds);
+
+      scode = response.statusCode;
+      if (response.statusCode == 200) {
+        String token = response.data.toString();
+        this.tryToken(token: token);
+      } else {
+        error = response.data['message'].toString();
+      }
+    } catch (e) {
+      print(e);
+      return e;
+    }
+  }
+
+  void tryToken({String? token}) async {
+    if (token == null) {
+      print("no token");
+      return;
+    } else {
+      try {
+        Dio.Response response = await dio().get('/user',
+            options: Dio.Options(headers: {'Authorization': 'Bearer $token'}));
+
+        if (response.statusCode == 200) {
+          print(response.data.toString());
+          token = token;
+        } else {
+          print(response.statusCode);
+          print(response.data['message'].toString());
+        }
+      } catch (e) {
+        print(e);
+      }
+    }
   }
 
   @override
@@ -71,7 +116,7 @@ class _login_pageState extends State<login_page> {
               ),
               ElevatedButton(
                 child: Text('Login'),
-                onPressed: () {
+                onPressed: () async {
                   Map creds = {
                     'email': email.text,
                     'password': password.text,
@@ -79,11 +124,25 @@ class _login_pageState extends State<login_page> {
                   };
                   var credss = jsonEncode(creds);
                   if (formkey.currentState!.validate()) {
-                    Provider.of<auth>(context, listen: false).login(credss);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => (HomeScreen())));
+                    // Provider.of<auth>(context, listen: false).login(credss);
+
+                    await login(credss);
+                    print(scode);
+                    if (scode == 200) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => (HomeScreen())));
+                     
+                    } else {
+                      print(error);
+                    }
+                    error = null;
+                    scode = null;
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => (HomeScreen())));
                   }
                 },
               )

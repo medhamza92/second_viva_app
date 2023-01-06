@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' as Dio;
 import 'package:flutter/material.dart';
 import 'package:second_viva_app/dio.dart';
 
@@ -7,19 +7,18 @@ class auth extends ChangeNotifier {
   bool get authentificated => isLoggedIn;
   void login(var creds) async {
     print(creds);
-    var dio = Dio();
-    var response =
-        await dio.post('http://192.168.43.31:8000/api/sanctum/token',
-            data: creds,
-            options: Options(
 
-                followRedirects: false,
-                
-                headers: {'Accept': 'application/json'}));
-    print('cc ziin');
-    print(response.data.toString());
-    isLoggedIn = true;
-    notifyListeners();
+    try {
+      Dio.Response response = await dio().post('/sanctum/token', data: creds);
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        String token = response.data.toString();
+        this.tryToken(token: token);
+      } else
+        print(response.data.toString());
+    } catch (e) {
+      print(e);
+    }
   }
 
   // void test() async {
@@ -31,5 +30,31 @@ class auth extends ChangeNotifier {
   void logout() {
     isLoggedIn = false;
     notifyListeners();
+  }
+
+  void tryToken({String? token}) async {
+    if (token == null) {
+      print("no token");
+      return;
+    } else {
+      try {
+        Dio.Response response = await dio().get('/user',
+            options: Dio.Options(headers: {'Authorization': 'Bearer $token'}));
+
+        if (response.statusCode == 200) {
+          print(response.data.toString());
+          isLoggedIn = true;
+          token = token;
+          notifyListeners();
+        } else {
+          print(response.statusCode);
+          print(response.data['message'].toString());
+          isLoggedIn = false;
+          notifyListeners();
+        }
+      } catch (e) {
+        print(e);
+      }
+    }
   }
 }
