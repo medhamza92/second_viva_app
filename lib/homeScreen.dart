@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_viva_app/auth.dart';
+import 'package:second_viva_app/firstForm.dart';
 import 'package:second_viva_app/login_page.dart';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -32,7 +33,45 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(child: Text("hello")),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              child: Text('Add A New viva'),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => (FirstForm())));
+              },
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.all(20),
+                fixedSize: Size(300, 50),
+                textStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                primary: Color.fromARGB(158, 255, 255, 255),
+                onPrimary: Color.fromARGB(255, 0, 57, 104),
+                side: BorderSide(
+                    color: Color.fromARGB(255, 0, 57, 104), width: 2),
+                shape: StadiumBorder(),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              child: Text('Consult Old vivas'),
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.all(20),
+                fixedSize: Size(300, 50),
+                textStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                primary: Color.fromARGB(158, 255, 255, 255),
+                onPrimary: Color.fromARGB(255, 0, 57, 104),
+                side: BorderSide(
+                    color: Color.fromARGB(255, 0, 57, 104), width: 2),
+                shape: StadiumBorder(),
+              ),
+            ),
+          ],
+        ),
         drawer: Drawer(
             child: ListView(
           children: [
