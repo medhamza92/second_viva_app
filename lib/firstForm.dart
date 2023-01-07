@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'package:path_provider/path_provider.dart';
 import 'package:second_viva_app/homeScreen.dart';
 import 'package:second_viva_app/vivaResult.dart';
 import 'package:second_viva_app/dio.dart';
@@ -43,6 +44,24 @@ class _FirstFormState extends State<FirstForm> {
     }
 
     String code = "ddgdg";
+    generatePdf(var data, String storeddToken) async {
+      var tempDir = await getTemporaryDirectory();
+      var fullPath = tempDir.path + '/$code.pdf';
+      try {
+        Dio.Response response = await dio().download(
+            '/sendPDF?code=$code', '$fullPath',
+            options: Dio.Options(
+                headers: {'Authorization': 'Bearer $storeddToken'},
+                method: 'POST'));
+        print(response.statusCode);
+        print(response.data.toString());
+        // print(response.data.toString());
+      } catch (e) {
+        print(e);
+        return e;
+      }
+    }
+
     createViva(var datas, var storeddToken) async {
       try {
         Dio.Response response = await dio().post('/viva/create',
@@ -231,6 +250,8 @@ class _FirstFormState extends State<FirstForm> {
                 };
                 await getToken();
                 await createViva(datas, storedToken);
+                Map pdfCode = {'code': code};
+                await generatePdf(pdfCode, storedToken);
                 Navigator.push(
                     context,
                     MaterialPageRoute(
