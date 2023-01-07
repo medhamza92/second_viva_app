@@ -9,6 +9,7 @@ class vivaResult extends StatelessWidget {
       ExaminatorMark,
       SupervisorMark,
       VivaPresidentMark,
+      vivaCode,
       Students;
 
   double? vivaMark;
@@ -23,7 +24,8 @@ class vivaResult extends StatelessWidget {
       required this.SupervisorMark,
       required this.VivaPresidentMark,
       required this.Students,
-      required this.vivaMark});
+      required this.vivaMark,
+      required this.vivaCode});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,22 @@ class vivaResult extends StatelessWidget {
         Text(
           '$vivaMark',
           style: TextStyle(fontSize: 25),
+          
+        ),Text(
+          'Viva Code :',
+          style: TextStyle(
+            backgroundColor: Color.fromARGB(255, 0, 57, 104),
+            color: Colors.white,
+          ),
         ),
+        SizedBox(
+          height: 20,
+        ),
+        Text(
+          '$vivaCode',
+          style: TextStyle(fontSize: 25),
+        ),
+        
       ]),
     );
   }

@@ -42,17 +42,17 @@ class _FirstFormState extends State<FirstForm> {
       return storedToken;
     }
 
+    String code = "ddgdg";
     createViva(var datas, var storeddToken) async {
-      print(datas);
-
       try {
         Dio.Response response = await dio().post('/viva/create',
             data: datas,
             options: Dio.Options(
                 headers: {'Authorization': 'Bearer $storeddToken'}));
-        print(datas);
-        if (response.statusCode == 200) {
-          print(response.data.toString());
+        print(response.statusCode);
+        if (response.statusCode == 201) {
+          // print(response.data.toString());
+          code = response.data['code'].toString();
         } else {
           var error = response.data.toString();
           print(error);
@@ -244,7 +244,8 @@ class _FirstFormState extends State<FirstForm> {
                             SupervisorMark: SupervisorMark.text,
                             vivaMark: vivaCalac(),
                             VivaPresidentMark: VivaPresidentMark.text,
-                            Students: Students.text)));
+                            Students: Students.text,
+                            vivaCode: code)));
               },
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.all(20),
