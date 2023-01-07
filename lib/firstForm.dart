@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'package:second_viva_app/homeScreen.dart';
 import 'package:second_viva_app/vivaResult.dart';
+import 'package:second_viva_app/dio.dart';
+import 'package:dio/dio.dart' as Dio;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class FirstForm extends StatefulWidget {
   const FirstForm({Key? key}) : super(key: key);
@@ -23,14 +27,42 @@ class _FirstFormState extends State<FirstForm> {
 
   @override
   Widget build(BuildContext context) {
-    void _vivaCalac() {
+    vivaCalac() {
       vivaMark = double.parse(ExaminatorMark.text) * 0.3 +
           double.parse(SupervisorMark.text) * 0.3 +
           double.parse(VivaPresidentMark.text) * 0.3;
-      print(vivaMark);
+      return (vivaMark);
     }
 
-    ;
+    final storage = new FlutterSecureStorage();
+    late var storedToken;
+    getToken() async {
+      storedToken = await storage.read(key: 'token');
+      print(storedToken);
+      return storedToken;
+    }
+
+    createViva(var datas, var storeddToken) async {
+      print(datas);
+
+      try {
+        Dio.Response response = await dio().post('/viva/create',
+            data: datas,
+            options: Dio.Options(
+                headers: {'Authorization': 'Bearer $storeddToken'}));
+        print(datas);
+        if (response.statusCode == 200) {
+          print(response.data.toString());
+        } else {
+          var error = response.data.toString();
+          print(error);
+        }
+      } catch (e) {
+        print(e);
+        return e;
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -184,8 +216,21 @@ class _FirstFormState extends State<FirstForm> {
 
             ElevatedButton(
               child: Text('calcluate Viva'),
-              onPressed: () {
-                _vivaCalac();
+              onPressed: () async {
+                Map datas = {
+                  'project_name': ProjectName.text,
+                  'year': Year.text,
+                  'sup_mark': double.parse(SupervisorMark.text),
+                  'exa_mark': double.parse(ExaminatorMark.text),
+                  'pre_mark': double.parse(VivaPresidentMark.text),
+                  'pre_name': VivaPresidentMark.text,
+                  'exa_name': ExaminatorName.text,
+                  'sup_name': SupervisorName.text,
+                  'students': Students.text.split(','),
+                  'final_mark': vivaCalac()
+                };
+                await getToken();
+                await createViva(datas, storedToken);
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -197,6 +242,7 @@ class _FirstFormState extends State<FirstForm> {
                             PresidentName: PresidentName.text,
                             ExaminatorMark: ExaminatorMark.text,
                             SupervisorMark: SupervisorMark.text,
+                            vivaMark: vivaCalac(),
                             VivaPresidentMark: VivaPresidentMark.text,
                             Students: Students.text)));
               },

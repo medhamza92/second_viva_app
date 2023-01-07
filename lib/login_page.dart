@@ -57,9 +57,8 @@ class _login_pageState extends State<login_page> {
 
   void storeToken({String? token}) async {
     this.storage.write(key: 'token', value: token);
+    print('token stored');
   }
-
-
 
   void tryToken({String? token}) async {
     if (token == null) {

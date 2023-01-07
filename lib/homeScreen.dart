@@ -26,8 +26,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   final storage = new FlutterSecureStorage();
+  late var storedToken;
   getToken() async {
-    return await storage.read(key: 'token');
+    storedToken = await storage.read(key: 'token');
+    return storedToken;
   }
 
   @override
@@ -38,7 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             ElevatedButton(
               child: Text('Add A New viva'),
-              onPressed: () {
+              onPressed: () async {
+                await getToken();
+                print(storedToken);
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => (FirstForm())));
               },
