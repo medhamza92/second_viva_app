@@ -15,7 +15,7 @@ class FirstForm extends StatefulWidget {
 }
 
 class _FirstFormState extends State<FirstForm> {
-  double? vivaMark;
+  late double vivaMark;
   TextEditingController ProjectName = new TextEditingController();
   TextEditingController Year = new TextEditingController();
   TextEditingController ExaminatorName = new TextEditingController();
@@ -32,6 +32,7 @@ class _FirstFormState extends State<FirstForm> {
       vivaMark = double.parse(ExaminatorMark.text) * 0.3 +
           double.parse(SupervisorMark.text) * 0.3 +
           double.parse(VivaPresidentMark.text) * 0.3;
+      vivaMark = vivaMark.toDouble();
       return (vivaMark);
     }
 
@@ -236,6 +237,7 @@ class _FirstFormState extends State<FirstForm> {
             ElevatedButton(
               child: Text('calcluate Viva'),
               onPressed: () async {
+                await vivaCalac();
                 Map datas = {
                   'project_name': ProjectName.text,
                   'year': Year.text,
@@ -246,7 +248,7 @@ class _FirstFormState extends State<FirstForm> {
                   'exa_name': ExaminatorName.text,
                   'sup_name': SupervisorName.text,
                   'students': Students.text.split(','),
-                  'final_mark': vivaCalac()
+                  'final_mark': vivaMark.toDouble()
                 };
                 await getToken();
                 await createViva(datas, storedToken);
@@ -263,7 +265,7 @@ class _FirstFormState extends State<FirstForm> {
                             PresidentName: PresidentName.text,
                             ExaminatorMark: ExaminatorMark.text,
                             SupervisorMark: SupervisorMark.text,
-                            vivaMark: vivaCalac(),
+                            vivaMark: vivaMark.toDouble(),
                             VivaPresidentMark: VivaPresidentMark.text,
                             Students: Students.text,
                             vivaCode: code)));

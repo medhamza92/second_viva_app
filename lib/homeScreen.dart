@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:second_viva_app/auth.dart';
 import 'package:second_viva_app/firstForm.dart';
 import 'package:second_viva_app/login_page.dart';
-
+import 'package:second_viva_app/consultVivaCode.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -62,7 +62,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             ElevatedButton(
               child: Text('Consult Old vivas'),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => (consultCode())));
+              },
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.all(20),
                 fixedSize: Size(300, 50),
