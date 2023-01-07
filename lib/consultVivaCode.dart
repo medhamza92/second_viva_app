@@ -106,7 +106,7 @@ class _consultCodeState extends State<consultCode> {
                             vivaMark: vivaData['final_mark'].toDouble()))));
               },
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.all(20),
+                // padding: EdgeInsets.all(20),
                 fixedSize: Size(220, 50),
                 textStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 primary: Color.fromARGB(255, 0, 57, 104),

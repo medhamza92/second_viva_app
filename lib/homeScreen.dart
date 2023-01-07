@@ -35,50 +35,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              child: Text('Add A New viva'),
-              onPressed: () async {
-                await getToken();
-                print(storedToken);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => (FirstForm())));
-              },
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.all(20),
-                fixedSize: Size(300, 50),
-                textStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                primary: Color.fromARGB(158, 255, 255, 255),
-                onPrimary: Color.fromARGB(255, 0, 57, 104),
-                side: BorderSide(
-                    color: Color.fromARGB(255, 0, 57, 104), width: 2),
-                shape: StadiumBorder(),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-              child: Text('Consult Old vivas'),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => (consultCode())));
-              },
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.all(20),
-                fixedSize: Size(300, 50),
-                textStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                primary: Color.fromARGB(158, 255, 255, 255),
-                onPrimary: Color.fromARGB(255, 0, 57, 104),
-                side: BorderSide(
-                    color: Color.fromARGB(255, 0, 57, 104), width: 2),
-                shape: StadiumBorder(),
-              ),
-            ),
-          ],
-        ),
         drawer: Drawer(
             child: ListView(
           children: [
@@ -93,6 +49,59 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             )
           ],
-        )));
+        )),
+        body: Container(
+          width: 360,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("images/BgAppTest.jpg"),
+                  fit: BoxFit.cover)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                child: Text('Add A New viva'),
+                onPressed: () async {
+                  await getToken();
+                  print(storedToken);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => (FirstForm())));
+                },
+                style: ElevatedButton.styleFrom(
+                  // padding: EdgeInsets.all(20),
+                  fixedSize: Size(300, 50),
+                  textStyle:
+                      TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  primary: Color.fromARGB(158, 255, 255, 255),
+                  onPrimary: Color.fromARGB(255, 0, 57, 104),
+                  side: BorderSide(
+                      color: Color.fromARGB(255, 0, 57, 104), width: 2),
+                  shape: StadiumBorder(),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                child: Text('Consult Old vivas'),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => (consultCode())));
+                },
+                style: ElevatedButton.styleFrom(
+                  // padding: EdgeInsets.all(20),
+                  fixedSize: Size(300, 50),
+                  textStyle:
+                      TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  primary: Color.fromARGB(158, 255, 255, 255),
+                  onPrimary: Color.fromARGB(255, 0, 57, 104),
+                  side: BorderSide(
+                      color: Color.fromARGB(255, 0, 57, 104), width: 2),
+                  shape: StadiumBorder(),
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 }

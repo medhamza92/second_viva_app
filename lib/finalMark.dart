@@ -39,7 +39,7 @@ class finalMark extends StatelessWidget {
         title: Text('Consult viva'),
       ),
       body: Container(
-        width: 300,
+        width: 360,
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage("images/final.png"), fit: BoxFit.cover)),
@@ -49,7 +49,7 @@ class finalMark extends StatelessWidget {
               children: [
                 // PROJECT NAME
                 Container(
-                  margin: EdgeInsets.only(top: 67, left: 113),
+                  margin: EdgeInsets.only(top: 41, left: 125),
                   child: Text(
                     'WEB Development',
                     style: TextStyle(
@@ -61,7 +61,7 @@ class finalMark extends StatelessWidget {
                 ),
                 // YEAR
                 Container(
-                  margin: EdgeInsets.only(top: 102, left: 50),
+                  margin: EdgeInsets.only(top: 85, left: 50),
                   child: Text(
                     '2021',
                     style: TextStyle(
@@ -73,73 +73,73 @@ class finalMark extends StatelessWidget {
                 ),
                 // STUDENT 1
                 Container(
-                  margin: EdgeInsets.only(top: 200, left: 5),
+                  margin: EdgeInsets.only(top: 200),
                   child: Text(
                     Students[0],
                     style: TextStyle(
-                        fontSize: 10,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 0, 0, 0)),
+                        color: Colors.white),
                   ),
                 ),
                 // STUDENT 2
                 Container(
-                  margin: EdgeInsets.only(top: 220, left: 5),
+                  margin: EdgeInsets.only(top: 222),
                   child: Text(
                     Students[1],
                     style: TextStyle(
-                        fontSize: 10,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 0, 0, 0)),
+                        color: Colors.white),
                   ),
                 ),
                 // STUDENT 3
                 Container(
-                  margin: EdgeInsets.only(top: 240, left: 5),
+                  margin: EdgeInsets.only(top: 245),
                   child: Text(
                     Students[2],
                     style: TextStyle(
-                        fontSize: 10,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 0, 0, 0)),
+                        color: Colors.white),
                   ),
                 ),
                 // PRESIDENT NAME
                 Container(
-                  margin: EdgeInsets.only(top: 301, left: 10),
+                  margin: EdgeInsets.only(top: 325, ),
                   child: Text(
                     '$PresidentName',
                     style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 0, 0, 0)),
+                        color: Colors.white),
                   ),
                 ),
                 // EXAMINATOR NAME
                 Container(
-                  margin: EdgeInsets.only(top: 368, left: 10),
+                  margin: EdgeInsets.only(top: 408,),
                   child: Text(
                     '$ExaminatorName',
                     style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 0, 0, 0)),
+                        color: Colors.white),
                   ),
                 ),
                 // SUPERVISOR NAME
                 Container(
-                  margin: EdgeInsets.only(top: 435, left: 10),
+                  margin: EdgeInsets.only(top: 488,),
                   child: Text(
                     '$SupervisorName',
                     style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 0, 0, 0)),
+                        color: Colors.white),
                   ),
                 ),
                 // PRESIDENT MARK
                 Container(
-                  margin: EdgeInsets.only(top: 304, left: 227),
+                  margin: EdgeInsets.only(top: 328, left: 260),
                   child: Text(
                     '$VivaPresidentMark',
                     style: TextStyle(
@@ -150,7 +150,7 @@ class finalMark extends StatelessWidget {
                 ),
                 // EXAMINATOR MARK
                 Container(
-                  margin: EdgeInsets.only(top: 371, left: 227),
+                  margin: EdgeInsets.only(top: 410, left: 260),
                   child: Text(
                     '$ExaminatorMark',
                     style: TextStyle(
@@ -161,7 +161,7 @@ class finalMark extends StatelessWidget {
                 ),
                 // SUPERVISOR MARK
                 Container(
-                  margin: EdgeInsets.only(top: 438, left: 227),
+                  margin: EdgeInsets.only(top: 490, left: 260),
                   child: Text(
                     '$SupervisorMark',
                     style: TextStyle(
@@ -172,7 +172,7 @@ class finalMark extends StatelessWidget {
                 ),
                 // FINAL MARK
                 Container(
-                  margin: EdgeInsets.only(top: 513, left: 116),
+                  margin: EdgeInsets.only(top: 585, left: 116),
                   child: Text(
                     '$vivaMark',
                     style: TextStyle(
@@ -185,7 +185,7 @@ class finalMark extends StatelessWidget {
 
                 // DONT TOUCH THIS !!!
                 Container(
-                  margin: EdgeInsetsDirectional.only(top: 471),
+                  margin: EdgeInsetsDirectional.only(top: 276),
                   child: Text(
                     '',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

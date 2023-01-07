@@ -86,6 +86,7 @@ class _FirstFormState extends State<FirstForm> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        backgroundColor: Color.fromARGB(255, 0, 57, 104),
         title: Text('Add New Viva'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
@@ -271,7 +272,7 @@ class _FirstFormState extends State<FirstForm> {
                             vivaCode: code)));
               },
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.all(20),
+                // padding: EdgeInsets.all(20),
                 fixedSize: Size(300, 50),
                 textStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 primary: Color.fromARGB(255, 0, 57, 104),
