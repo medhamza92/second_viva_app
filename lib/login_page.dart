@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:dio/dio.dart' as Dio;
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:second_viva_app/dio.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +19,7 @@ class _login_pageState extends State<login_page> {
   TextEditingController email = new TextEditingController();
   TextEditingController password = new TextEditingController();
   final formkey = GlobalKey<FormState>();
+  String errorMsg = "";
   @override
   void initState() {
     // TODO: implement initState
@@ -86,17 +86,43 @@ class _login_pageState extends State<login_page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 0, 57, 104),
       body: Container(
+        width: 360,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("images/login.png"), fit: BoxFit.cover)),
         child: Form(
           key: formkey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Text(
+                'Viva Marks App 2',
+                style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                'Login',
+                style: TextStyle(
+                    fontSize: 60,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+              SizedBox(
+                height: 25,
+              ),
               TextFormField(
                 decoration: InputDecoration(
                     labelText: 'enter your Email',
-                    labelStyle:
-                        TextStyle(fontSize: 15, color: Colors.grey.shade400),
+                    labelStyle: TextStyle(
+                        fontSize: 15,
+                        color: Color.fromARGB(255, 255, 255, 255)),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10))),
                 controller: email,
@@ -112,8 +138,9 @@ class _login_pageState extends State<login_page> {
               TextFormField(
                 decoration: InputDecoration(
                     labelText: 'Enter Your Password',
-                    labelStyle:
-                        TextStyle(fontSize: 15, color: Colors.grey.shade400),
+                    labelStyle: TextStyle(
+                        fontSize: 15,
+                        color: Color.fromARGB(255, 255, 255, 255)),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10))),
                 controller: password,
@@ -124,7 +151,20 @@ class _login_pageState extends State<login_page> {
                 height: 30,
               ),
               ElevatedButton(
-                child: Text('Login'),
+                style: ElevatedButton.styleFrom(
+                  shape: StadiumBorder(),
+                  // padding: EdgeInsets.all(20),
+                  fixedSize: Size(220, 50),
+                  backgroundColor: Colors.white,
+                ),
+                child: Text(
+                  'Login',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Color.fromARGB(255, 0, 57, 104),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 onPressed: () async {
                   Map creds = {
                     'email': email.text,
@@ -144,7 +184,9 @@ class _login_pageState extends State<login_page> {
                           MaterialPageRoute(
                               builder: (context) => (HomeScreen())));
                     } else {
-                      print(error);
+                      setState(() {
+                        errorMsg = error;
+                      });
                     }
                     error = null;
                     scode = null;
@@ -154,7 +196,13 @@ class _login_pageState extends State<login_page> {
                     //         builder: (context) => (HomeScreen())));
                   }
                 },
-              )
+              ),
+              
+              SizedBox(
+                height: 30,
+              ),
+
+              Text('$errorMsg',style: TextStyle(color: Colors.red),)
             ],
           ),
         ),

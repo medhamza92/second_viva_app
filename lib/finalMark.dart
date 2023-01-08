@@ -51,7 +51,7 @@ class finalMark extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(top: 41, left: 125),
                   child: Text(
-                    'WEB Development',
+                    '$ProjectName',
                     style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -63,7 +63,7 @@ class finalMark extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(top: 85, left: 50),
                   child: Text(
-                    '2021',
+                    '$Year',
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -106,7 +106,9 @@ class finalMark extends StatelessWidget {
                 ),
                 // PRESIDENT NAME
                 Container(
-                  margin: EdgeInsets.only(top: 325, ),
+                  margin: EdgeInsets.only(
+                    top: 325,
+                  ),
                   child: Text(
                     '$PresidentName',
                     style: TextStyle(
@@ -117,7 +119,9 @@ class finalMark extends StatelessWidget {
                 ),
                 // EXAMINATOR NAME
                 Container(
-                  margin: EdgeInsets.only(top: 408,),
+                  margin: EdgeInsets.only(
+                    top: 408,
+                  ),
                   child: Text(
                     '$ExaminatorName',
                     style: TextStyle(
@@ -128,7 +132,9 @@ class finalMark extends StatelessWidget {
                 ),
                 // SUPERVISOR NAME
                 Container(
-                  margin: EdgeInsets.only(top: 488,),
+                  margin: EdgeInsets.only(
+                    top: 488,
+                  ),
                   child: Text(
                     '$SupervisorName',
                     style: TextStyle(

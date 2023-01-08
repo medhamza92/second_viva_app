@@ -93,7 +93,7 @@ class _consultCodeState extends State<consultCode> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => (finalMark(
-                            ProjectName: vivaData['viva'],
+                            ProjectName: vivaData['project_name'],
                             Year: vivaData['year'].toString(),
                             ExaminatorName: vivaData['exa_name'],
                             ExaminatorMark: vivaData['exa_mark'].toDouble(),

@@ -32,8 +32,18 @@ class _FirstFormState extends State<FirstForm> {
       vivaMark = double.parse(ExaminatorMark.text) * 0.3 +
           double.parse(SupervisorMark.text) * 0.3 +
           double.parse(VivaPresidentMark.text) * 0.3;
-      vivaMark = vivaMark.toDouble();
       return (vivaMark);
+    }
+
+    sendEmail(var data, String token) async {
+      try {
+        Dio.Response response = await dio().post('/sendEmail',
+            data: data,
+            options: Dio.Options(headers: {'Authorization': 'Bearer $token'}));
+        print(response.data.toString());
+      } catch (e) {
+        print(e);
+      }
     }
 
     final storage = new FlutterSecureStorage();
@@ -45,23 +55,23 @@ class _FirstFormState extends State<FirstForm> {
     }
 
     String code = "ddgdg";
-    generatePdf(var data, String storeddToken) async {
-      var tempDir = await getTemporaryDirectory();
-      var fullPath = tempDir.path + '/$code.pdf';
-      try {
-        Dio.Response response = await dio().download(
-            '/sendPDF?code=$code', '$fullPath',
-            options: Dio.Options(
-                headers: {'Authorization': 'Bearer $storeddToken'},
-                method: 'POST'));
-        print(response.statusCode);
-        print(response.data.toString());
-        // print(response.data.toString());
-      } catch (e) {
-        print(e);
-        return e;
-      }
-    }
+    // generatePdf(var data, String storeddToken) async {
+    //   var tempDir = await getTemporaryDirectory();
+    //   var fullPath = tempDir.path + '/$code.pdf';
+    //   try {
+    //     Dio.Response response = await dio().download(
+    //         '/sendPDF?code=$code', '$fullPath',
+    //         options: Dio.Options(
+    //             headers: {'Authorization': 'Bearer $storeddToken'},
+    //             method: 'POST'));
+    //     print(response.statusCode);
+    //     print(response.data.toString());
+    //     // print(response.data.toString());
+    //   } catch (e) {
+    //     print(e);
+    //     return e;
+    //   }
+    // }
 
     createViva(var datas, var storeddToken) async {
       try {
@@ -85,8 +95,8 @@ class _FirstFormState extends State<FirstForm> {
 
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         backgroundColor: Color.fromARGB(255, 0, 57, 104),
+        automaticallyImplyLeading: false,
         title: Text('Add New Viva'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
@@ -238,7 +248,6 @@ class _FirstFormState extends State<FirstForm> {
             ElevatedButton(
               child: Text('calcluate Viva'),
               onPressed: () async {
-                await vivaCalac();
                 Map datas = {
                   'project_name': ProjectName.text,
                   'year': Year.text,
@@ -249,12 +258,14 @@ class _FirstFormState extends State<FirstForm> {
                   'exa_name': ExaminatorName.text,
                   'sup_name': SupervisorName.text,
                   'students': Students.text.split(','),
-                  'final_mark': vivaMark.toDouble()
+                  'final_mark': vivaCalac()
                 };
                 await getToken();
                 await createViva(datas, storedToken);
-                Map pdfCode = {'code': code};
-                await generatePdf(pdfCode, storedToken);
+                Map data = {'code': code};
+                sendEmail(jsonEncode(data), storedToken);
+                print(jsonEncode(data));
+
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -266,7 +277,7 @@ class _FirstFormState extends State<FirstForm> {
                             PresidentName: PresidentName.text,
                             ExaminatorMark: ExaminatorMark.text,
                             SupervisorMark: SupervisorMark.text,
-                            vivaMark: vivaMark.toDouble(),
+                            vivaMark: vivaCalac(),
                             VivaPresidentMark: VivaPresidentMark.text,
                             Students: Students.text,
                             vivaCode: code)));
