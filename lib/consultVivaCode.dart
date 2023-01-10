@@ -89,6 +89,17 @@ class _consultCodeState extends State<consultCode> {
                 await checkViva(datas, storedToken);
                 print(vivaData);
                 print(jsonDecode(vivaData['students']));
+                var StudentsArr = jsonDecode(vivaData['students']);
+                String student1 = StudentsArr[0];
+                String student2 = '/';
+                String student3 = '/';
+                if (StudentsArr.length == 3) {
+                  student2 = StudentsArr[1];
+                  student3 = StudentsArr[2];
+                } else if (StudentsArr.length == 2) {
+                  student2 = StudentsArr[1];
+                }
+
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -103,6 +114,9 @@ class _consultCodeState extends State<consultCode> {
                             SupervisorMark: vivaData['sup_mark'].toDouble(),
                             vivaCode: vivaData['code'],
                             Students: jsonDecode(vivaData['students']),
+                            student1: student1,
+                            student2: student2,
+                            student3: student3,
                             vivaMark: vivaData['final_mark'].toDouble()))));
               },
               style: ElevatedButton.styleFrom(

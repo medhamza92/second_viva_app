@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 import 'package:dio/dio.dart' as Dio;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:second_viva_app/dio.dart';
@@ -117,35 +118,47 @@ class _login_pageState extends State<login_page> {
               SizedBox(
                 height: 25,
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                    labelText: 'enter your Email',
-                    labelStyle: TextStyle(
-                        fontSize: 15,
-                        color: Color.fromARGB(255, 255, 255, 255)),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10))),
-                controller: email,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "enter your password";
-                  }
-                },
+              SizedBox(
+                width: 340,
+                child: TextFormField(
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white)),
+                      labelText: 'enter your Email',
+                      labelStyle: TextStyle(
+                          fontSize: 15,
+                          color: Color.fromARGB(255, 255, 255, 255)),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                  controller: email,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "enter your password";
+                    }
+                  },
+                ),
               ),
               SizedBox(
                 height: 35,
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                    labelText: 'Enter Your Password',
-                    labelStyle: TextStyle(
-                        fontSize: 15,
-                        color: Color.fromARGB(255, 255, 255, 255)),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10))),
-                controller: password,
-                validator: (value) =>
-                    value!.isEmpty ? 'enter your password ' : null,
+              SizedBox(
+                width: 340,
+                child: TextFormField(
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white)),
+                      labelText: 'Enter Your Password',
+                      labelStyle: TextStyle(
+                          fontSize: 15,
+                          color: Color.fromARGB(255, 255, 255, 255)),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                  controller: password,
+                  validator: (value) =>
+                      value!.isEmpty ? 'enter your password ' : null,
+                ),
               ),
               SizedBox(
                 height: 30,
@@ -197,12 +210,13 @@ class _login_pageState extends State<login_page> {
                   }
                 },
               ),
-              
               SizedBox(
                 height: 30,
               ),
-
-              Text('$errorMsg',style: TextStyle(color: Colors.red),)
+              Text(
+                '$errorMsg',
+                style: TextStyle(color: Colors.red),
+              )
             ],
           ),
         ),

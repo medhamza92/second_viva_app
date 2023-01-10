@@ -7,7 +7,10 @@ class finalMark extends StatelessWidget {
       ExaminatorName,
       SupervisorName,
       PresidentName,
-      vivaCode;
+      vivaCode,
+      student1,
+      student2,
+      student3;
   List<dynamic> Students;
   double? vivaMark, VivaPresidentMark, SupervisorMark, ExaminatorMark;
 
@@ -22,7 +25,10 @@ class finalMark extends StatelessWidget {
       required this.VivaPresidentMark,
       required this.Students,
       required this.vivaMark,
-      required this.vivaCode});
+      required this.vivaCode,
+      required this.student1,
+      required this.student2,
+      required this.student3});
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +81,7 @@ class finalMark extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(top: 200),
                   child: Text(
-                    Students[0],
+                    student1,
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
@@ -86,7 +92,7 @@ class finalMark extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(top: 222),
                   child: Text(
-                    Students[1],
+                    student2,
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
@@ -97,7 +103,7 @@ class finalMark extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(top: 245),
                   child: Text(
-                    Students[2],
+                    student3,
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,

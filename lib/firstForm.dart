@@ -254,7 +254,7 @@ class _FirstFormState extends State<FirstForm> {
                   'sup_mark': double.parse(SupervisorMark.text),
                   'exa_mark': double.parse(ExaminatorMark.text),
                   'pre_mark': double.parse(VivaPresidentMark.text),
-                  'pre_name': VivaPresidentMark.text,
+                  'pre_name': PresidentName.text,
                   'exa_name': ExaminatorName.text,
                   'sup_name': SupervisorName.text,
                   'students': Students.text.split(','),
